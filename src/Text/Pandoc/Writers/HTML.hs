@@ -1044,11 +1044,11 @@ inlineToHtml opts inline = do
                                    inlineToHtml opts il
            MathJax _ -> do
               let newLine = strToHtml $ if t == DisplayMath then "\n" else ""
-              let mathExpr = case t of
+              let mathStr = case t of
                                InlineMath  -> "\\(" ++ str ++ "\\)"
                                DisplayMath -> "\\[" ++ str ++ "\\]"
-              let m = H.span ! A.class_ mathClass $ toHtml $ mathExpr
-              return $ newLine >> m >> newLine
+              let m = H.span ! A.class_ mathClass $ toHtml $ mathStr
+              return $ m >> newLine
            KaTeX _ -> return $ H.span ! A.class_ mathClass $ toHtml $
               case t of
                 InlineMath  -> "\\(" ++ str ++ "\\)"
